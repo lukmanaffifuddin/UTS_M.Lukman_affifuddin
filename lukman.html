@@ -1,0 +1,67 @@
+<html>
+<head>
+	
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>Tokenisasi Kata Indonesia Sederhana</title>
+	<link rel="stylesheet" type="text/css" href="themes/metro-blue/easyui.css">
+    <link rel="stylesheet" type="text/css" href="themes/mobile.css">
+    <link rel="stylesheet" type="text/css" href="themes/icon.css">
+	
+</head>
+<body>
+	 <div class="easyui-navpanel">
+        <header>
+            <div class="m-toolbar">
+                <span class="m-title">Tokenisasi Kata Indonesia Sederhana</span>
+            </div>
+        </header>
+        <div style="padding:0 20px; margin:20px auto;">
+            <div>
+                <input type="text" name="kalimat" id="kalimat" prompt="Masukkan Kalimat"  style="width:35%;height:30px" padding: 5px 15px; #f1f1f1; outline: none;">
+            </div>
+			<div>
+			   <font color="blue" size=5 ><P id="inputan"></P>
+                <font color="black" size=5 ><p id="inputan_length"></p>
+			</div>
+            
+        </div>
+		<center><strong><font color="red" size=4><p id="inputan"></p></font></strong></center>
+		<center><strong><font color="blue" size=9><p id="inputan_length"></p></font></strong></center>
+		<footer>
+            <div class="m-toolbar">
+                <span class="m-title">M. LUKMAN AFFIFUDDIN</span>
+				<div class="m-right">
+					<a href="javascript:void(0)" class="easyui-linkbutton" plain="true" outline="true" style="width:20px" onclick="reset()">Reset</a>
+				</div>
+			</div>
+        </footer>
+    </div>
+	<script>
+	function reset()
+	{
+		location.reload();
+		document.getElementById("inputan").innerHTML = "";
+		document.getElementById("inputan_length").innerHTML = "";
+	}
+	function tokenisasi(value) {
+                words = value.split(" ")
+                wordmap = {}
+
+                for (let i = 0; i < words.length; i++) {
+                    let currentWordCount = wordmap[words[i]];
+                    let count = currentWordCount ? currentWordCount : 0;
+                    wordmap[words[i]] = count + 1;
+                }
+                document.getElementById('inputan').innerHTML = words.join("<br />");
+                document.getElementById('inputan_length').innerHTML = `Dari Inputan diatas Terdeteksi bahwa ada ${Object.keys(wordmap).length} kata.`;
+            }
+
+            document.getElementById('kalimat').addEventListener('keyup', event => {
+                tokenisasi(event.target.value)
+            })	
+	
+	</script>
+</body>
+</html>
